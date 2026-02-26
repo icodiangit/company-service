@@ -12,7 +12,7 @@ public class CompanyServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CompanyServiceApplication.class, args);
-		log.info("Company Service");
+		log.info("Company Services");
 	}
 
 }
