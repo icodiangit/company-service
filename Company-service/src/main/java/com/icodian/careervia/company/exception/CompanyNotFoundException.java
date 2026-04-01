@@ -1,4 +1,4 @@
-package com.icodian.careervia.companyexception;
+package com.icodian.careervia.company.exception;
 
 public class CompanyNotFoundException  extends RuntimeException{
 	

@@ -3,8 +3,8 @@ package com.icodian.careervia.company.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import com.icodian.careervia.company.dto.CompanyDTO;
 import com.icodian.careervia.company.service.CompanyService;
-import com.icodian.careervia.companydto.CompanyDTO;
 
 import java.util.List;
 
@@ -39,4 +39,13 @@ public class CompanyController {
                                     @RequestBody CompanyDTO dto) {
         return service.updateCompany(id, dto);
     }
+
+
+//DELETE COMPANY
+@DeleteMapping("/{id}")
+public String deleteCompany(@PathVariable Long id) {
+ service.deleteCompany(id);
+ return "Company deleted successfully";
+}
+
 }

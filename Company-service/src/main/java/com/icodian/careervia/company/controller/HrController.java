@@ -1,14 +1,15 @@
 package com.icodian.careervia.company.controller;
 
+import com.icodian.careervia.company.dto.HrDTO;
+//import com.icodian.careervia.company.dto.HrDTO;
 import com.icodian.careervia.company.service.HrService;
-import com.icodian.careervia.companydto.HrDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/hrs")
 @RequiredArgsConstructor
@@ -54,6 +55,30 @@ public class HrController {
             return ResponseEntity.ok(updatedHr);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Invalid status value: " + status);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+    
+    
+ // UPDATE HR DETAILS
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateHr(@PathVariable Long id,
+                                      @RequestBody HrDTO hrDTO) {
+        try {
+            HrDTO updatedHr = hrService.updateHr(id, hrDTO);
+            return ResponseEntity.ok(updatedHr);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+    
+ // DELETE HR
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteHr(@PathVariable Long id) {
+        try {
+            hrService.deleteHr(id);
+            return ResponseEntity.ok("HR deleted successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         }

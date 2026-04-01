@@ -1,4 +1,4 @@
-package com.icodian.careervia.companydto;
+package com.icodian.careervia.company.dto;
 
 import com.icodian.careervia.companyenum.Status;
 import lombok.Data;

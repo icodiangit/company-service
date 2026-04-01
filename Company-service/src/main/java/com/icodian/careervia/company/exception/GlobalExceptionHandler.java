@@ -1,4 +1,4 @@
-package com.icodian.careervia.companyexception;
+package com.icodian.careervia.company.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
