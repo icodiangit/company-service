@@ -98,4 +98,9 @@ public class CompanyServiceImpl implements CompanyService {
 
         return dto;
     }
+
+	public List<CompanyDTO> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

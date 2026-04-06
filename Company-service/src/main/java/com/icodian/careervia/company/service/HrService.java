@@ -8,6 +8,7 @@ public interface HrService {
     HrDTO createHr(HrDTO dto);
 
     List<HrDTO> getAllHrs();
+    
 
     HrDTO getHrById(Long id);
 
