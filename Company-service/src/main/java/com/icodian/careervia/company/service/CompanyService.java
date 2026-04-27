@@ -29,6 +29,7 @@ public class CompanyService {
         company.setLocation(dto.getLocation());
         company.setWebsite(dto.getWebsite());
         company.setDescription(dto.getDescription());
+        company.setPassword(dto.getPassword());
 
         // If status is provided use it, otherwise default to ACTIVE
         company.setStatus(dto.getStatus() != null ? dto.getStatus() : Status.ACTIVE);
@@ -88,7 +89,8 @@ public class CompanyService {
         dto.setStatus(c.getStatus());
         dto.setWebsite(c.getWebsite());
         dto.setDescription(c.getDescription());
-
+        dto.setPassword(c.getPassword());
+        
         return dto;
     }
 }

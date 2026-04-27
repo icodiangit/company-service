@@ -23,6 +23,9 @@ public class Company {
 
     @Column(name = "EMAIL", length = 120)
     private String email;
+    
+    @Column(name = "password", nullable = false)
+	private String password;
 
     @Column(name = "INDUSTRY", length = 80)
     private String industry;
