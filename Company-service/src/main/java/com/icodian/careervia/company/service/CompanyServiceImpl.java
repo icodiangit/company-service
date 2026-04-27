@@ -1,17 +1,27 @@
 package com.icodian.careervia.company.service;
 
-import com.icodian.careervia.company.dto.CompanyDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface CompanyService {
+import com.icodian.careervia.company.dto.CompanyDTO;
+import com.icodian.careervia.company.entity.Company;
+import com.icodian.careervia.company.repository.CompanyRepository;
+import com.icodian.careervia.companyenum.Status;
 
-    CompanyDTO createCompany(CompanyDTO dto);
+@Service
+@RequiredArgsConstructor
+public class CompanyServiceImpl implements CompanyService {
 
-    List<CompanyDTO> getAllCompanies();
+    private final CompanyRepository repository;
 
-    CompanyDTO getCompanyById(Long id);
+    @Override
+    public CompanyDTO createCompany(CompanyDTO dto) {
 
-    CompanyDTO updateCompany(Long id, CompanyDTO dto);
+        Company company = new Company();
 
         company.setCompanyName(dto.getCompanyName());
         company.setEmail(dto.getEmail());
@@ -19,9 +29,7 @@ public interface CompanyService {
         company.setLocation(dto.getLocation());
         company.setWebsite(dto.getWebsite());
         company.setDescription(dto.getDescription());
-        company.setPassword(dto.getPassword());
 
-        // If status is provided use it, otherwise default to ACTIVE
         company.setStatus(dto.getStatus() != null ? dto.getStatus() : Status.ACTIVE);
 
         company.setCreatedAt(LocalDate.now());
@@ -29,7 +37,7 @@ public interface CompanyService {
         return mapToDTO(repository.save(company));
     }
 
-    // ✅ GET ALL
+    @Override
     public List<CompanyDTO> getAllCompanies() {
         return repository.findAll()
                 .stream()
@@ -37,15 +45,16 @@ public interface CompanyService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ GET BY ID
+    @Override
     public CompanyDTO getCompanyById(Long id) {
+
         Company company = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Company not found"));
 
         return mapToDTO(company);
     }
 
-    // ✅ UPDATE (Status Added Here)
+    @Override
     public CompanyDTO updateCompany(Long id, CompanyDTO dto) {
 
         Company company = repository.findById(id)
@@ -58,7 +67,6 @@ public interface CompanyService {
         company.setWebsite(dto.getWebsite());
         company.setDescription(dto.getDescription());
 
-        // ✅ Update Status also
         if (dto.getStatus() != null) {
             company.setStatus(dto.getStatus());
         }
@@ -66,7 +74,15 @@ public interface CompanyService {
         return mapToDTO(repository.save(company));
     }
 
-    // ✅ MAPPER
+    @Override
+    public void deleteCompany(Long id) {
+
+        Company company = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+
+        repository.delete(company);
+    }
+
     private CompanyDTO mapToDTO(Company c) {
 
         CompanyDTO dto = new CompanyDTO();
@@ -79,11 +95,12 @@ public interface CompanyService {
         dto.setStatus(c.getStatus());
         dto.setWebsite(c.getWebsite());
         dto.setDescription(c.getDescription());
-        dto.setPassword(c.getPassword());
-        
+
         return dto;
     }
 
-    void deleteCompany(Long id);
-
+	public List<CompanyDTO> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

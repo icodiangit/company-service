@@ -1,8 +1,8 @@
-package com.icodian.careervia.companyrepository;
+package com.icodian.careervia.company.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.icodian.careervia.companyentity.Hr;
+import com.icodian.careervia.company.entity.Hr;
 
 import java.util.List;
 

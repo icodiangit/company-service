@@ -1,4 +1,4 @@
-package com.icodian.careervia.companyentity;
+package com.icodian.careervia.company.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
