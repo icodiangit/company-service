@@ -13,5 +13,6 @@ public class CompanyDTO {
     private String location;
     private String website;
     private String description;
+    private String password;
     private Status status;
 }
